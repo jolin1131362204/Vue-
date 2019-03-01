@@ -1,28 +1,29 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+  <div>
+    <router-view/>
+    <FooterGuide v-show="$route.meta.showFooter"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+  import FooterGuide from './components/FooterGuide/FooterGuide.vue'
+  export default {
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+    async mounted () {
+      // 触发vuex的getAddress(), 从后台获取address
+      this.$store.dispatch('getAddress')
+      // 触发vuex的getUser(), 从后台获取user
+      this.$store.dispatch('getUser')
+
+      // this.$store.dispatch('getShopInfo')
+    },
+
+    components: {
+      FooterGuide
+    }
   }
-}
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+
 </style>
